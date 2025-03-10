@@ -155,7 +155,8 @@ const RecipeOutput = () => {
           throw new Error(`Server responded with status: ${response.status} ${response.statusText}`);
         }
     
-        const data = await response.json();
+        const recipe = await response.json();
+        const data = recipe.data;
         console.log(`Recipe ${modalType}ed successfully:`, data);
     
         setIsLoading(false);
@@ -163,6 +164,7 @@ const RecipeOutput = () => {
     
         // Navigate after publishing
         if (modalType === 'publish') {
+          console.log()
           navigate(`/recipe/view/${data._id}`, { state: { recipe: data } });
         }
       } catch (error) {
